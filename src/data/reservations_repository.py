@@ -3,13 +3,8 @@ from enum import Enum
 from models.table import Table
 from utils.singleton import singleton
 
-
 @singleton
 class ReservationsRepository:
-
-    class AvailabilityType(Enum):
-        AVAILABLE = 0
-        BUSY = 1
 
     def __init__(self):
         self._tables = dict()
@@ -18,14 +13,23 @@ class ReservationsRepository:
     def tables(self):
         return list(self._tables.values())
 
-    def status(self, tid) -> AvailabilityType:
+    def is_booked(self, tid) -> bool:
         if tid not in self._tables:
             raise Exception('Table with id {} does not exist'.format(tid))
 
         if tid in self._bookings:
-            return ReservationsRepository.AvailabilityType.BUSY
+            return True
 
-        return ReservationsRepository.AvailabilityType.AVAILABLE
+        return False
+
+    def get_booking_info(self, tid):
+        if tid not in self._tables:
+            raise Exception('Table with id {} does not exist'.format(tid))
+
+        if tid not in self._bookings:
+            return None
+
+        return self._bookings[tid]
 
     def add_table(self, title, seats) -> bool:
         if title in self._tables:
@@ -39,6 +43,7 @@ class ReservationsRepository:
         if tid not in self._tables:
             return False
 
+        del self._bookings[tid]
         del self._tables[tid]
         return True
 
@@ -53,10 +58,7 @@ class ReservationsRepository:
         del self._bookings[tid]
         return True
 
-    def book(self, table, booking) -> bool:
-        # table id
-        tid = table.name
-
+    def book(self, tid, booking) -> bool:
         if tid not in self._tables:
             raise Exception('Table with id {} does not exist'.format(tid))
 

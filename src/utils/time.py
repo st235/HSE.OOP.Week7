@@ -2,5 +2,7 @@ import datetime as dt
 
 
 def get_current_time():
-    current_time = dt.datetime.now()
-    return current_time.hour * 60 + current_time.minute
+    return get_time(dt.datetime.now())
+
+def get_time(datetime):
+    return datetime.hour * 60 + datetime.minute

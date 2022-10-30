@@ -6,7 +6,8 @@ from presentation.home.tables_status.tables_status_controller import TablesStatu
 
 class TablesStatusPage(BasePage):
     def __init__(self):
-        super().__init__(TablesStatusController())
+        super().__init__(TablesStatusController(self))
 
     def onPrepareView(self):
-        st.write('Hello from tables status page')
+        st.title('Status')
+        st.table(super().controller.populate_tables_info())

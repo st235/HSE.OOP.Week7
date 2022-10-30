@@ -37,9 +37,9 @@ class TablesManagementController:
             return
 
         if self._reservations_repository.book(title, Booking('Staff', 'N/A', get_current_time(), -1)):
-            self._view.show_success('The table has been successfully released')
+            self._view.show_success('The table has been successfully booked')
         else:
-            self._view.show_error('The table can\'t be released. Perhaps, it was not booked?')
+            self._view.show_error('The table can\'t be booked. Perhaps, there is another booking?')
 
     def release_the_table(self, title):
         if title is None or len(title) == 0:

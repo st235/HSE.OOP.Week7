@@ -18,14 +18,16 @@ class TablesBookingPage(BasePage):
             col1, col2 = st.columns(2)
 
             with col1:
-                st.time_input('From')
+                time = st.time_input('From')
 
             with col2:
-                st.number_input('Period')
+                period = st.number_input('Period')
 
-            title = st.selectbox('Tables', [t.name for t in super().controller.get_tables()])
+            # table id
+            tid = st.selectbox('Tables', [t.name for t in super().controller.get_tables()])
 
-            st.form_submit_button('Submit')
+            if st.form_submit_button('Submit'):
+                super().controller.book_the_table(tid, name, phone, time, period)
 
 
 
