@@ -1,4 +1,8 @@
 class Table:
+    """
+    Representation of a table, consists of: name and available seats.
+    """
+
     def __init__(self, name, seats):
         self._name = name
         self._seats = seats

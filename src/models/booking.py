@@ -1,18 +1,22 @@
 class Booking:
-    def __init__(self, name, phone, time, interval):
-        self._name = name
-        self._phone = phone
-        self._time = time
-        self._interval = interval
+    """
+    Booking representation, contains of: user's name, user's phone, booking time and an interval of the booking.
+    """
+
+    def __init__(self, name, phone, time, period):
+        self.__name = name
+        self.__phone = phone
+        self.__time = time
+        self.__interval = period
 
     @property
     def name(self):
-        return self._name
+        return self.__name
 
     @property
     def phone(self):
-        return self._phone
+        return self.__phone
 
     @property
     def time(self):
-        return self._time
+        return self.__time

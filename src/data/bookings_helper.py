@@ -2,6 +2,10 @@ from collections import OrderedDict
 
 
 class BookingsHelper:
+    """
+    Simple utility class that helps to manage overlapping bookings.
+    """
+
     def __init__(self, max_intersection):
         if max_intersection < 1:
             raise Exception('Max intersection count should be at least 1')
@@ -9,7 +13,11 @@ class BookingsHelper:
         self._timeline = OrderedDict()
         self._max_intersection = max_intersection
 
-    def book(self, start, period) -> bool:
+    def book(self, start: int, period: int) -> bool:
+        """
+        O(n lgn) algorithm that helps to find overlapping bookings.
+        """
+
         # not inclusive
         end = start + period + 1
 

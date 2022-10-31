@@ -5,9 +5,13 @@ from presentation.home.tables_status.tables_status_controller import TablesStatu
 
 
 class TablesStatusPage(BasePage):
+    """
+    Status page: shows a list of tables with their availability and associated booking information.
+    """
+
     def __init__(self):
         super().__init__(TablesStatusController(self))
 
-    def onPrepareView(self):
-        st.title('Status')
+    def on_prepare_view(self):
+        st.title('Tables status')
         st.table(super().controller.populate_tables_info())
