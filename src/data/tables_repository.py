@@ -1,5 +1,6 @@
 from typing import Optional
 
+from data.streamlit_dict import StreamlitDict
 from models.booking import Booking
 from models.table import Table
 from utils.singleton import singleton
@@ -13,8 +14,8 @@ class TablesRepository:
     """
 
     def __init__(self):
-        self.__tables = dict()
-        self.__bookings = dict()
+        self.__tables = StreamlitDict('tables')
+        self.__bookings = StreamlitDict('bookings')
 
     @property
     def tables(self):
