@@ -36,7 +36,7 @@ class TablesManagementPage(BasePage):
             super().controller.release_table(title)
 
         if col_right.button('Delete', disabled=has_no_tables):
-            super().controller.delete(title)
+            super().controller.delete_table(title)
 
     def __build_new_table_section(self):
         """

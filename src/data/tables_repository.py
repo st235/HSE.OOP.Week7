@@ -74,7 +74,8 @@ class TablesRepository:
         if tid not in self.__tables:
             return False
 
-        del self.__bookings[tid]
+        if tid in self.__bookings:
+            del self.__bookings[tid]
         del self.__tables[tid]
         return True
 

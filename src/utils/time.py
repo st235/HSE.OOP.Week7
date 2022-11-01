@@ -19,9 +19,11 @@ def get_time(datetime) -> int:
     """
     return datetime.hour * 60 + datetime.minute
 
+
 def get_hours_and_minutes(time: int) -> (int, int):
     """
     Returns a tuple of hours, minutes for the given integer time of the day
     """
+    max_time = 24 * 60
 
-    return time // 60, time % 60
+    return (time % max_time) // 60, (time % max_time) % 60

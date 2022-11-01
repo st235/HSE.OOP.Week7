@@ -12,11 +12,13 @@ class TablesBookingController:
         self.__view = view
         self.__tables_repository = tables_repository
 
-    def get_tables(self):
+    def get_available_tables(self):
         """
-        Gets all available tables.
+        Gets all available tables at the moment.
+        If a table is booked it won't be displayed.
         """
-        return self.__tables_repository.tables
+        return list(filter(lambda table: not self.__tables_repository.is_booked(table.name),
+                           self.__tables_repository.tables))
 
     def book_table(self, table_title: str, name: str, phone: str, datetime, period: int):
         """
@@ -30,10 +32,14 @@ class TablesBookingController:
         final_date = start_date + period
         """
         if table_title is None or len(table_title) == 0:
-            self.__view.submit_error('Table should exist')
+            self.__view.submit_error('Table does not exist')
+            return
+
+        if name is None or len(name) == 0 or phone is None or len(phone) == 0:
+            self.__view.submit_error("Given data is invalid: (name = '{}', phone = '{}')".format(name, phone))
             return
 
         if self.__tables_repository.book(table_title, Booking(name, phone, get_time(datetime), period)):
-            self.__view.submit_success('The table has been successfully booked')
+            self.__view.reload()
         else:
             self.__view.submit_error('The table can\'t be booked. Perhaps, there is another booking?')

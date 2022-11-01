@@ -7,7 +7,7 @@ class Booking:
         self.__name = name
         self.__phone = phone
         self.__time = time
-        self.__interval = period
+        self.__period = period
 
     @property
     def name(self):
@@ -20,3 +20,7 @@ class Booking:
     @property
     def time(self):
         return self.__time
+
+    @property
+    def period(self):
+        return self.__period

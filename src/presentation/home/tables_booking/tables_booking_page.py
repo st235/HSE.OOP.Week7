@@ -12,7 +12,7 @@ class TablesBookingPage(BasePage):
         super().__init__(TablesBookingController(self))
 
     def on_prepare_view(self):
-        with st.form('book_a_table'):
+        with st.form('book_a_table', clear_on_submit=True):
             st.title('Tables Booking')
 
             name = st.text_input('Name', max_chars=64)
@@ -26,11 +26,11 @@ class TablesBookingPage(BasePage):
             with col_right:
                 period = st.number_input('Period', min_value=30, max_value=180, step=30, format="%d")
 
-            tables = super().controller.get_tables()
+            tables = super().controller.get_available_tables()
             has_no_tables = len(tables) == 0
 
             # table id
-            tid = st.selectbox('Tables', [t.name for t in tables])
+            tid = st.selectbox('Available tables', [t.name for t in tables])
 
             if st.form_submit_button('Submit', disabled=has_no_tables):
                 super().controller.book_table(tid, name, phone, time, period)

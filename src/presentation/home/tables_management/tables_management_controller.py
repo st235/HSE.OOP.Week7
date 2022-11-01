@@ -20,7 +20,7 @@ class TablesManagementController:
         :param seats: available seats count
         """
         if title is None or len(title) == 0 or seats <= 0 or seats > 30:
-            self.__view.submit_error('Given title {} or seats {} are invalid'.format(title, seats))
+            self.__view.submit_error("The given data is invalid:(title='{}', seats='{}')".format(title, seats))
             return
 
         if self.__tables_repository.create(title, seats):
@@ -55,7 +55,7 @@ class TablesManagementController:
         else:
             self.__view.submit_error('The table can\'t be booked. Perhaps, there is another booking?')
 
-    def release_table(self, title):
+    def release_table(self, title: str):
         """
         Releases a table with the given title. If the table has not been already booked
         will show error.
